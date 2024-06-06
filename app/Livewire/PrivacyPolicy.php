@@ -17,6 +17,7 @@ class PrivacyPolicy extends Component
     public $companyName;
     public $websiteUrl;
     public $privacyPolicy;
+    public $privacyPolicyId;
     public array $dataProcessingActivities = [];
 
     public function save()
@@ -71,6 +72,34 @@ class PrivacyPolicy extends Component
         $mpdf->Output('privacy_policy.pdf', \Mpdf\Output\Destination::DOWNLOAD);
     }
 
+    public function readPrivacyPolicy($id)
+    {
+        $privacyPolicy = PrivacyPolicyModel::find($id);
+
+        $this->companyName = $privacyPolicy->company_name;
+        $this->websiteUrl = $privacyPolicy->company_website_url;
+        $this->privacyPolicy = $privacyPolicy->generated_privacy_policy;
+        $this->dataProcessingActivities = explode(',', $privacyPolicy->data_processing_activities);
+        
+        // Store the ID of the privacy policy
+        $this->privacyPolicyId = $id;
+
+        $this->showReadPrivacyPolicyModal = true;
+    }
+
+    public function approve()
+    {
+        // Fetch the privacy policy using the stored ID
+        $privacyPolicy = PrivacyPolicyModel::find($this->privacyPolicyId);
+
+        // Update the privacy policy status to approved
+        $privacyPolicy->update([
+            'privacy_policy_status' => 'approved',
+        ]);
+
+        $this->success('Privacy Policy approved successfully!');
+        $this->showReadPrivacyPolicyModal = false;
+    }
     public function add()
     {
         $this->showPrivacyPolicyModal = true;
@@ -79,12 +108,6 @@ class PrivacyPolicy extends Component
     public function close()
     {
         $this->showPrivacyPolicyModal = false;
-        $this->showReadPrivacyPolicyModal = false;
-    }
-
-    public function approve()
-    {
-        $this->success('Privacy Policy approved successfully!');
         $this->showReadPrivacyPolicyModal = false;
     }
 
