@@ -68,7 +68,7 @@
                     <x-mary-menu-item title="Consent Management" icon="o-sparkles" link="/consent-management" />
                     <x-mary-menu-item title="Data Mapping" icon="o-sparkles" link="/data-mapping" />
                     <x-mary-menu-item title="Risk Assessment and DPIA" icon="o-sparkles" link="/risk-assessment" />
-                    <x-mary-menu-item title="Data Subject Rights" icon="o-sparkles" link="/data-subject-requests" />
+                    <x-mary-menu-item title="Data Subject Rights" icon="o-sparkles" link="/data-subjects-requests" />
                     <x-mary-menu-item title="Data Incident Management" icon="o-sparkles" link="/incident-response" />
                     
                     <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">

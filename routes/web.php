@@ -7,6 +7,7 @@ use App\Livewire\PrivacyPolicy;
 use App\Livewire\RiskAssessment;
 use App\Livewire\DataMapping;
 use App\Livewire\DataSubjectsRequests;
+use App\Livewire\IncidentResponse;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +24,7 @@ Route::middleware([
     Route::get('/risk-assessment', RiskAssessment::class)->name('risk-assessment');
     Route::get('/data-mapping', DataMapping::class)->name('data-mapping');
     Route::get('/data-subjects-requests', DataSubjectsRequests::class)->name('data-subjects-requests');
+    Route::get('/incident-response', IncidentResponse::class)->name('incident-response');
 });
 
 Route::get('/logout', function () {
