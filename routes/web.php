@@ -10,7 +10,7 @@ use App\Livewire\DataSubjectsRequests;
 use App\Livewire\IncidentResponse;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/register');
 });
 
 Route::middleware([
