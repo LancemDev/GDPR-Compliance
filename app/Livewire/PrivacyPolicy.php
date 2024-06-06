@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Mary\Traits\Toast;
+use App\Models\PrivacyPolicy as PrivacyPolicyModel;
+use GuzzleHttp\Client;
 
 class PrivacyPolicy extends Component
 {
@@ -26,7 +28,28 @@ class PrivacyPolicy extends Component
 
         $this->showPrivacyPolicyModal = false;
 
-        $this->success('Privacy Policy saved successfully!');
+        // generate a privacy policy using ai by calling my route lance-flow.vercel.app/policy
+        $client = new Client(); //GuzzleHttp\Client
+        $result = $client->post('https://lance-flow.vercel.app/policy', [
+            'json' => [
+                'companyName' => $this->companyName,
+                'websiteUrl' => $this->websiteUrl,
+                'dataProcessingActivities' => $this->dataProcessingActivities,
+            ]
+        ]);
+
+        $response = json_decode($result->getBody()->getContents());
+
+        PrivacyPolicyModel::create([
+            'user_id' => auth()->id(),
+            'company_name' => $this->companyName,
+            'company_website_url' => $this->websiteUrl,
+            'data_processing_activities' => json_encode($this->dataProcessingActivities),
+            'generated_privacy_policy' => $response->policy, // assuming the policy is returned in a 'policy' property
+            'privacy_policy_status' => 'pending',
+        ]);
+
+        $this->success('Privacy Policy created successfully!');
     }
 
     public function add()

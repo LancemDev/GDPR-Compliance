@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="bumblebee" >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,28 @@
         @livewireStyles
     </head>
     <body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+
+        <x-mary-nav sticky full-width>
+ 
+            <x-slot:brand>
+                {{-- Drawer toggle for "main-drawer" --}}
+                <label for="main-drawer" class="lg:hidden mr-3">
+                    <x-mary-icon name="o-bars-3" class="cursor-pointer" />
+                </label>
+     
+                {{-- Brand --}}
+                <div>GDPR Compliance</div>
+            </x-slot:brand>
+     
+            {{-- Right side actions --}}
+            <x-slot:actions>
+                <x-mary-theme-toggle darkTheme="dracula" lightTheme="retro" />
+                <x-mary-button label="Messages" icon="o-envelope" link="###" class="btn-ghost btn-sm" responsive />
+                <x-mary-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
+                <x-mary-button label="Logout" icon="o-power" link="/logout" class="btn-ghost btn-sm" responsive />
+                {{-- <x-mary-button label="Logout" icon="o-power" link="/logout" class="btn-ghost btn-sm" responsive /> --}}
+            </x-slot:actions>
+        </x-mary-nav>
      
         {{-- MAIN --}}
         <x-mary-main full-width>
@@ -64,5 +86,6 @@
      
         {{-- Toast --}}
         <x-mary-toast />
+        <livewire:chatty />
     </body>
 </html>

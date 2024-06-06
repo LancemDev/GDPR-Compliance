@@ -24,3 +24,13 @@ Route::middleware([
     Route::get('/data-mapping', DataMapping::class)->name('data-mapping');
     Route::get('/data-subjects-requests', DataSubjectsRequests::class)->name('data-subjects-requests');
 });
+
+Route::get('/logout', function () {
+    auth()->logout();
+
+    request()->session()->invalidate();
+
+    request()->session()->regenerateToken();
+
+    return redirect('/');
+})->name('logout');
