@@ -9,8 +9,10 @@ use App\Livewire\DataMapping;
 use App\Livewire\DataSubjectsRequests;
 use App\Livewire\IncidentResponse;
 
+use App\Livewire\Home;
+
 Route::get('/', function () {
-    return redirect('/register');
+    return view('welcome');
 });
 
 Route::middleware([
