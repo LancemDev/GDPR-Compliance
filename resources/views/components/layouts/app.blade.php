@@ -28,7 +28,7 @@
                 </label>
      
                 {{-- Brand --}}
-                <div>GDPR Compliance</div>
+                <div>BORASALAMA</div>
             </x-slot:brand>
      
             {{-- Right side actions --}}
